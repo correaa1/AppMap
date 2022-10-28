@@ -1,24 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { Component, } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-maps';
 
-export default function App() {
-  const [state, setState] = useState({
-    latitude: -27.5579069,
-    longitude: -48.6281753,
-    latitudeDelta:0.0922,
-    longitudeDelta:0.0421, })
+export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+  region: {
+  latitude: -27.5565821,
+  longitude: -48.6245674,
+  latitudeDelta:0.0922,
+  longitudeDelta:0.0421,}}}
+
+  
+
+render(){
   return (
     <View style={styles.container}>
       <MapView
       style={styles.mapa}
-       setState {...state}
+    region={this.state.region}
+    
       />
+  
     </View>
   );
 }
-
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
