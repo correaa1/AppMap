@@ -1,33 +1,47 @@
 import { StatusBar } from 'expo-status-bar';
-import { Component, } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import MapView from 'react-native-maps';
 
-export default class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-  region: {
-  latitude: -27.5565821,
-  longitude: -48.6245674,
+export default function App() {
+  const [state, setState] = useState({
+    region: {
+   latitude: -27.5579069,
+  longitude: -48.6281753,
   latitudeDelta:0.0922,
-  longitudeDelta:0.0421,}}}
-
+  longitudeDelta:0.0421,}
+    }
+    )
   
-
-render(){
+  function  moverCidade(lat,long){
+    let newState = state
+    
+      let region = {
+        latitude: lat,
+        longitude: long,
+        latitudeDelta:0.0922,
+        longitudeDelta:0.0421,
+      }
+      newState.region = region
+      setState(newState)
+      console.log(newState)
+    }
   return (
     <View style={styles.container}>
+      <View style={{flexDirection: 'row'}}>
+      <Button title='Floripa' onPress={() => {moverCidade(-27.5579069, -48.6281753 )}}/>
+      <Button title='São Paulo' onPress={() => {moverCidade(-23.6034287, -46.661898)}}/>
+      </View>
+      <Text>{state.region.latitude} | {state.region.longitude}</Text>
       <MapView
       style={styles.mapa}
-    region={this.state.region}
-    
+      region={state.region}
       />
-  
+
     </View>
   );
 }
-}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -37,6 +51,6 @@ const styles = StyleSheet.create({
   },
   mapa:{
     width: "100%",
-    height:750,
+    height:650,
   }
 });
