@@ -9,31 +9,26 @@ export default function App() {
    latitude: -27.5579069,
   longitude: -48.6281753,
   latitudeDelta:0.0922,
-  longitudeDelta:0.0421,}
-    }
+  longitudeDelta:0.0421,},
+  texto: ''
+    },
+      
     )
-  
-  function  moverCidade(lat,long){
-    let newState = state
     
-      let region = {
-        latitude: lat,
-        longitude: long,
-        latitudeDelta:0.0922,
-        longitudeDelta:0.0421,
-      }
-      newState.region = region
-      setState(newState)
-      console.log(newState)
+    function mudouMapa(){
+       state.texto = state.region.latitude
+      setState(state);
+      console.log(state)
     }
+    
   return (
     <View style={styles.container}>
-      <View style={{flexDirection: 'row'}}>
-      <Button title='Floripa' onPress={() => {moverCidade(-27.5579069, -48.6281753 )}}/>
-      <Button title='São Paulo' onPress={() => {moverCidade(-23.6034287, -46.661898)}}/>
-      </View>
       <Text>{state.region.latitude} | {state.region.longitude}</Text>
+      <Text>Latitude atual</Text>
+      <Text>{state.texto}</Text>
       <MapView
+      /*onMapReady={() => {alert("mapa carregado")}}*/
+      onRegionChangeComplete={state.mudoumapa}
       style={styles.mapa}
       region={state.region}
       />
